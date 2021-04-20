@@ -1,7 +1,18 @@
-<h1>My tasks</h1>
-<ul>
-  <% @tasks.each do |task| %>
-    <li><%= link_to task.title, task_path(task) %> . <%= link_to "Delete", task_path(task), method: :delete, data: {confirm: "Are you sure?" } %></li>
-  <% end %>
-</ul>
-<%= link_to "Add new task", new_task_path %>
+<div class="container">
+  <h1>My tasks</h1>
+  <ul>
+    <% @tasks.each do |task| %>
+      <li>
+        <% if task.completed == true %>
+          <%= fa_icon "check-square" %>
+        <% else %>
+          <%= fa_icon "square" %>
+        <% end %>
+        <%= link_to task.title, task_path(task) %> . <%= link_to task_path(task), method: :delete, data: {confirm: "Are you sure?" } do %>
+          <%= fa_icon "trash-alt" %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+  <%= link_to "Add new task", new_task_path %>
+</div>
